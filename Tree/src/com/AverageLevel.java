@@ -1,21 +1,16 @@
 package com;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
-/**
- * 方法一：层次遍历，反向输出
- * 1）queue and stack
- * 2）两个队列
- * 3） O（n） O（n）
- * 方法二： 广度优先搜索算法 + 头插法
- * 每次讲queue中数据全部遍历
- */
-public class LevelOrderReverse {
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+public class AverageLevel {
+    public List<Double> averageOfLevels(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
         }
-        Deque<List<Integer>> res = new ArrayDeque<>();
+        List<Double> res = new ArrayList<>();
         Queue<TreeNode> thisLevelQueue = new LinkedList<>();
         Queue<TreeNode> nextLevelQueue = new LinkedList<>();
         thisLevelQueue.offer(root);
@@ -33,11 +28,15 @@ public class LevelOrderReverse {
                 Queue<TreeNode> temp = thisLevelQueue;
                 thisLevelQueue = nextLevelQueue;
                 nextLevelQueue = temp;
-                res.push(new ArrayList<>(tempLevelNode));
+                // double ，避免int溢出
+                double sum = 0;
+                for (Integer integer : tempLevelNode) {
+                    sum += integer;
+                }
+                res.add(sum / tempLevelNode.size());
                 tempLevelNode.clear();
             }
         }
-
-        return new ArrayList<>(res);
+        return res;
     }
 }
