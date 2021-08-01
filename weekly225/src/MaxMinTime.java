@@ -36,9 +36,27 @@ public class MaxMinTime {
         return hour + ":" + min;
     }
 
+    public String maximumTime_best(String time){
+        char[] data = time.toCharArray();
+        if(data[0] == '?'){
+            data[0] = '4'<=data[1]&&data[1]<='9'?'1':'2';
+        }
+        if(data[1] == '?'){
+            data[1] = data[0] == '2'?'3':'9';
+        }
+        if(data[3] == '?'){
+            data[3] = '5';
+        }
+        if(data[4] == '?'){
+            data[4] = '9';
+        }
+        return new String(data);
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(new MaxMinTime().maximumTime("2?:?0"));
-        System.out.println(new MaxMinTime().maximumTime("??:?0"));
-        System.out.println(new MaxMinTime().maximumTime("1?:22"));
+        System.out.println(new MaxMinTime().maximumTime_best("2?:?0"));
+        System.out.println(new MaxMinTime().maximumTime_best("??:?0"));
+        System.out.println(new MaxMinTime().maximumTime_best("1?:22"));
     }
 }
