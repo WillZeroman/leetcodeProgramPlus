@@ -7,7 +7,7 @@ public class ReorderSpaces {
         List<String> words = new ArrayList<>();
         String[] arr = text.split(" ");
         for (String s : arr) {
-            if (!s.isBlank()) {
+            if (!s.isEmpty()) {
                 words.add(s.trim());
             }
         }
